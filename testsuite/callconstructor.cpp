@@ -1,9 +1,9 @@
 /**
- * defs.hpp - 
+ * dummy.cpp - 
  * @author: Jonathan Beard
- * @version: Sat 22 August 2020
+ * @version: Thu Jun 18 08:08:03 2015
  * 
- * Copyright 2020 Jonathan Beard
+ * Copyright 2015 Jonathan Beard
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,27 +17,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef MPLDEFS_HPP
-#define MPLDEFS_HPP  1
 #include <cstdint>
+#include <iostream>
+#include "mpl.hpp"
 
-namespace mpl
+template < class T > struct derived_dummy
 {
-    
-    /**
-     * have a stable version of a byte. 
-     */
-    using byte_t                            = std::uint8_t;
-    /**
-     * _unused - pretty much zero cost way to get rid of 
-     * unused warning in a way that is "c++ compliant". 
-     * @param x - T&&
-     */
-    template < class T > constexpr static void _unused( T &&x )
-    { 
-        (void)(x); 
-    }
+    using tls_type = T;
+};
+
+int
+main( )
+{
+   using qtype_t = mpl::fifo_queue< derived_dummy< int > /** just for base class **/ >;
+   qtype_t q;
+
+   return( EXIT_SUCCESS );
 }
-
-
-#endif /* END MPLDEFS_HPP */

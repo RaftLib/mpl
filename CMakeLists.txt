@@ -17,7 +17,7 @@ install( FILES ${PROJECT_SOURCE_DIR}/include/mpl  DESTINATION ${CMAKE_INSTALL_PR
 include_directories ( ${PROJECT_SOURCE_DIR} )
 include_directories ( ${PROJECT_SOURCE_DIR}/include )
 
-add_subdirectory( lib )
+add_subdirectory( src )
 
 if( NOT WIN32 )
 ##

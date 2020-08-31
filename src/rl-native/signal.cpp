@@ -1,7 +1,7 @@
 /**
- * signalvars.hpp - 
+ * signal.cpp - 
  * @author: Jonathan Beard
- * @version: Sun May 11 08:26:13 2014
+ * @version: Wed Dec 31 15:14:56 2014
  * 
  * Copyright 2014 Jonathan Beard
  * 
@@ -17,24 +17,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef RAFTSIGNALVARS_HPP
-#define RAFTSIGNALVARS_HPP  1
-#include <cstdint>
+#include "signal.hpp"
 
-namespace raft{
-/** 
- * far more signals than we'll probably need (32-bits that is), but
- * I figure why not reserve the space now.  < 0xffff = system signals,
- * the rest are user space.
- */
+using namespace Buffer;
 
-static const std::uint32_t MAX_SYSTEM_SIGNAL( 0xfff );
+   (this)->sig = other.sig;
 
-enum signal : std::uint32_t {
-   none = 0,
-   quit,
-   term,
-   eof = MAX_SYSTEM_SIGNAL
-};
+Signal& 
+Signal::operator = ( raft::signal signal )
+{
+   (this)->sig = signal;
+   return( (*this) );
 }
-#endif /* END RAFTSIGNALVARS_HPP */
+
+Signal& 
+Signal::operator = ( raft::signal &signal )
+{
+   (this)->sig = signal;
+   return( (*this) );
+}
+
+Signal::operator raft::signal ()
+{
+   return( (this)->sig );
+}
+
+std::size_t 
+Signal::getindex() noexcept
+{
+   return( index );
+}
